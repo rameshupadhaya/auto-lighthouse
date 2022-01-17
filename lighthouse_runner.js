@@ -178,10 +178,11 @@ const complete = (urlList, autoOpen) => {
   opts.output = outputMode;
   let desktopOpts = _desktopOpts;
   desktopOpts.output = outputMode;
-  const fileTime = createFileTime();
+  const dir = 'report';
   // tempFilePath is wherever we want to store the generated report
-  let tempFilePath = path.join(process.cwd(), "lighthouse", fileTime);
+  let tempFilePath = path.join(process.cwd(), "lighthouse", dir);
   if (!fs.existsSync(tempFilePath)) {
+    fs.rmSync(dir, { recursive: true, force: true });
     fs.mkdirSync(tempFilePath, { recursive: true });
   }
   _printNumberOfReports(formFactor, urlList);
